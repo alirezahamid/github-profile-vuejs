@@ -1,32 +1,51 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <header class="header">
+      <div class="header_title">
+        <h1>GitHub Profile</h1>
+      </div>
+      <div class="header_btn">
+        <eva-icon
+          name="moon-outline"
+          fill="black"
+        ></eva-icon>
+        <!-- <eva-icon
+          name="sun-outline"
+          fill="black"
+        ></eva-icon> -->
+      </div>
+
+    </header>
+    <SearchUser />
   </div>
 </template>
-
+<script>
+import SearchUser from './components/SearchUser'
+import { EvaIcon } from 'vue-eva-icons'
+export default {
+  name: 'app',
+  components: { SearchUser, [EvaIcon.name]: EvaIcon }
+}
+</script>
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "M PLUS Rounded 1c";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: #212121;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3em 0 5em 0;
+  h1 {
+    font-size: 28px;
+    font-weight: 900;
+    margin: 0;
+    padding: 0;
   }
 }
 </style>
