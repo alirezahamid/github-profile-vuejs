@@ -17,6 +17,10 @@
           ></eva-icon>
         </button>
       </div>
+      <span
+        style="display:none"
+        class="error_user"
+      >User not found :(</span>
     </form>
   </section>
 </template>
@@ -35,10 +39,19 @@ export default {
 </script>
 
 <style lang="scss">
+.search_container {
+  p {
+    font-size: 21px;
+    font-weight: 500;
+  }
+}
 .form_container {
   display: flex;
   flex-direction: column;
   width: 300px;
+  label {
+    font-size: 14px;
+  }
   input {
     width: 250px;
     height: 50px;
@@ -64,6 +77,11 @@ export default {
     border-radius: 8px;
     background-color: #212121;
     padding: 0 16px;
+    cursor: pointer;
   }
+}
+.error_user {
+  color: #ff006c;
+  margin: 0.5em 0 0 1em;
 }
 </style>

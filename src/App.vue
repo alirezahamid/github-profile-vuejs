@@ -17,14 +17,16 @@
 
     </header>
     <SearchUser />
+    <Profile />
   </div>
 </template>
 <script>
 import SearchUser from './components/SearchUser'
+import Profile from './components/Profile'
 import { EvaIcon } from 'vue-eva-icons'
 export default {
   name: 'app',
-  components: { SearchUser, [EvaIcon.name]: EvaIcon }
+  components: { SearchUser, Profile, [EvaIcon.name]: EvaIcon }
 }
 </script>
 <style lang="scss">
@@ -40,7 +42,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3em 0 5em 0;
+  margin: 3em 0;
   h1 {
     font-size: 28px;
     font-weight: 900;
