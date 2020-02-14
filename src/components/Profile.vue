@@ -1,18 +1,21 @@
 <template>
-  <section class="profile">
+  <section
+    v-show="activeSection"
+    class="profile"
+  >
     <div class="profile_user">
       <div class="profile_user_avatar">
         <img
-          src="https://avatars0.githubusercontent.com/u/36362784?v=4"
+          :src="userInfo.avatar_url"
           alt=""
           width="240"
         >
       </div>
       <div class="profile_content">
-        <p>Alireza Hamid</p>
-        <p>Company: TickTech</p>
-        <p>Location: Ahvaz</p>
-        <p>Website: <a href="http://alirezahamid.com">alirezahamid.com</a></p>
+        <p>{{userInfo.login}}</p>
+        <p v-show="userInfo.company">Company: {{userInfo.company}}</p>
+        <p v-show="userInfo.location">Location: {{userInfo.location}}</p>
+        <p v-show="userInfo.blog">Website: <a :href="userInfo.blog">{{userInfo.blog.replace(/(^\w+:|^)\/\//, '')}}</a></p>
       </div>
     </div>
 
@@ -144,8 +147,13 @@
 import { mapState } from 'vuex'
 export default {
   name: 'profile',
+  data: () => ({
+
+  }),
+  methods: {
+  },
   computed: {
-    ...mapState(['userInfo'])
+    ...mapState(['userInfo', 'activeSection'])
   }
 }
 </script>
@@ -156,6 +164,12 @@ export default {
   .profile_user_avatar {
     img {
       border-radius: 8px;
+    }
+  }
+  .profile_content {
+    a {
+      text-decoration: none;
+      color: #007fff;
     }
   }
   .profile_repo {

@@ -19,7 +19,7 @@
         </button>
       </div>
       <span
-        style="display:none"
+        v-show="showErrorMessage"
         class="error_user"
       >User not found :(</span>
     </form>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'searchuser',
   data: () => ({
@@ -41,7 +41,8 @@ export default {
       set (value) {
         this.$store.commit('pushUsername', value)
       }
-    }
+    },
+    ...mapState(['showErrorMessage'])
   },
   methods: {
     ...mapActions(['fetchUser'])
