@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     userInfo: [],
+    userRepo: [],
     username: '',
     activeSection: false,
     showErrorMessage: false
@@ -13,6 +14,9 @@ export default new Vuex.Store({
   mutations: {
     pushUser (state, payload) {
       state.userInfo = payload
+    },
+    pushUserRepo (state, payload) {
+      state.userRepo = payload
     },
     pushUsername (state, payload) {
       state.username = payload
@@ -25,14 +29,24 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    fetchUser ({ commit }) {
+    fetchUser ({ commit, dispatch }) {
       Api.getUser(this.state.username)
         .then((res) => {
           if (res.statusCode = 200) {
             commit('pushUser', res.data)
+            dispatch('fetchUserRepo')
             commit('showSection', true)
           } else {
             commit('showError', true)
+          }
+        })
+        .catch()
+    },
+    fetchUserRepo ({ commit }) {
+      Api.getUserRepos(this.state.username)
+        .then((res) => {
+          if (res.statusCode = 200) {
+            commit('pushUserRepo', res.data)
           }
         })
         .catch()

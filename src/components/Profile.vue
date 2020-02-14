@@ -20,9 +20,14 @@
     </div>
 
     <div class="profile_repo">
-      <div class="profile_repo_card">
-        <p>name of repo</p>
-        <span>desc of repo</span>
+      <div
+        v-for="(repo,key) in userRepo.reverse().slice(0, 4)"
+        :key="key"
+        class="profile_repo_card"
+      >
+        <p>{{repo.name}}</p>
+        <span v-if="repo.description<60">{{repo.description}}</span>
+        <span v-else>{{repo.description.substring(0,45)+"..."}}</span>
         <div class="profile_repo_info">
           <span>
             <eva-icon
@@ -30,7 +35,7 @@
               width="18"
               height="18"
               fill="grey"
-            ></eva-icon> Javascript
+            ></eva-icon> {{repo.language}}
           </span>
           <span>
             <eva-icon
@@ -38,7 +43,7 @@
               width="18"
               height="18"
               fill="grey"
-            ></eva-icon> 23
+            ></eva-icon> {{repo.stargazers_count}}
           </span>
           <span>
             <eva-icon
@@ -46,100 +51,11 @@
               width="18"
               height="18"
               fill="grey"
-            ></eva-icon> 6
+            ></eva-icon> {{repo.forks}}
           </span>
         </div>
       </div>
-      <div class="profile_repo_card">
-        <p>name of repo</p>
-        <span>desc of repo</span>
-        <div class="profile_repo_info">
-          <span>
-            <eva-icon
-              name="code-outline"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> Javascript
-          </span>
-          <span>
-            <eva-icon
-              name="star"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> 23
-          </span>
-          <span>
-            <eva-icon
-              name="copy"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> 6
-          </span>
-        </div>
-      </div>
-      <div class="profile_repo_card">
-        <p>name of repo</p>
-        <span>desc of repo</span>
-        <div class="profile_repo_info">
-          <span>
-            <eva-icon
-              name="code-outline"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> Javascript
-          </span>
-          <span>
-            <eva-icon
-              name="star"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> 23
-          </span>
-          <span>
-            <eva-icon
-              name="copy"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> 6
-          </span>
-        </div>
-      </div>
-      <div class="profile_repo_card">
-        <p>name of repo</p>
-        <span>desc of repo</span>
-        <div class="profile_repo_info">
-          <span>
-            <eva-icon
-              name="code-outline"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> Javascript
-          </span>
-          <span>
-            <eva-icon
-              name="star"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> 23
-          </span>
-          <span>
-            <eva-icon
-              name="copy"
-              width="18"
-              height="18"
-              fill="grey"
-            ></eva-icon> 6
-          </span>
-        </div>
-      </div>
+
     </div>
   </section>
 </template>
@@ -153,7 +69,7 @@ export default {
   methods: {
   },
   computed: {
-    ...mapState(['userInfo', 'activeSection'])
+    ...mapState(['userInfo', 'userRepo', 'activeSection'])
   }
 }
 </script>
@@ -177,10 +93,13 @@ export default {
     flex-wrap: wrap;
     height: 240px;
     .profile_repo_card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
       width: 396px;
       height: 113px;
       margin: 0 0 14px 14px;
-      padding: 0 1em;
+      padding: 0em 1em;
       background-color: #fafafa;
       border-radius: 8px;
       p {
@@ -196,7 +115,7 @@ export default {
     width: 16em;
     display: flex;
     justify-content: space-between;
-    padding: 0.5em 0;
+    // padding: 0.5em 0;
     font-size: 12px;
     span {
       display: flex;
