@@ -141,8 +141,12 @@
   </section>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'profile'
+  name: 'profile',
+  computed: {
+    ...mapState(['userInfo'])
+  }
 }
 </script>
 <style lang="scss">

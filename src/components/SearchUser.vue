@@ -9,8 +9,9 @@
           type="text"
           id="username"
           placeholder="alirezahamid"
+          v-model="username"
         >
-        <button>
+        <button @click.prevent="fetchUser">
           <eva-icon
             name="search-outline"
             fill="white"
@@ -26,13 +27,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'searchuser',
   data: () => ({
 
   }),
+  computed: {
+    username: {
+      get () {
+        return this.$store.state.username
+      },
+      set (value) {
+        this.$store.commit('pushUsername', value)
+      }
+    }
+  },
   methods: {
-
+    ...mapActions(['fetchUser'])
   }
 
 }
