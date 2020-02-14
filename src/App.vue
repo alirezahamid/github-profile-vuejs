@@ -8,11 +8,15 @@
         <eva-icon
           name="moon-outline"
           fill="black"
+          v-show="toggle"
+          @click="darkThemeSwitch"
         ></eva-icon>
-        <!-- <eva-icon
+        <eva-icon
           name="sun-outline"
-          fill="black"
-        ></eva-icon> -->
+          fill="white"
+          v-show="!toggle"
+          @click="darkThemeSwitch"
+        ></eva-icon>
       </div>
 
     </header>
@@ -26,7 +30,36 @@ import Profile from './components/Profile'
 import { EvaIcon } from 'vue-eva-icons'
 export default {
   name: 'app',
-  components: { SearchUser, Profile, [EvaIcon.name]: EvaIcon }
+  data: () => ({
+    toggle: true
+  }),
+  components: { SearchUser, Profile, [EvaIcon.name]: EvaIcon },
+  methods: {
+    addDarkTheme () {
+      var darkThemeElLink = document.createElement('link')
+      darkThemeElLink.setAttribute('href', './dark.css')
+      darkThemeElLink.setAttribute('rel', 'stylesheet')
+      darkThemeElLink.setAttribute('id', 'dark-theme-style')
+      var docHead = document.querySelector('head')
+      docHead.append(darkThemeElLink)
+      this.toggle = false
+    },
+    removeDarkTheme () {
+      var darkThemeElLink = document.querySelector('#dark-theme-style')
+      var parentNode = darkThemeElLink.parentNode
+      parentNode.removeChild(darkThemeElLink)
+      this.toggle = true
+    },
+    darkThemeSwitch () {
+      var darkThemeElLink = document.querySelector('#dark-theme-style')
+      if (!darkThemeElLink) {
+        this.addDarkTheme()
+      } else {
+        this.removeDarkTheme()
+      }
+    }
+  }
+
 }
 </script>
 <style lang="scss">
@@ -49,5 +82,9 @@ export default {
     margin: 0;
     padding: 0;
   }
+}
+.dark {
+  background-color: #212121;
+  color: white;
 }
 </style>

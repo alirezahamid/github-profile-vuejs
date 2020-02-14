@@ -71,7 +71,7 @@ export default {
     border: none;
     flex-grow: 1;
     background-color: #fafafa;
-    border-radius: 8px;
+    border-radius: 8px 0 0 8px;
     font-family: inherit;
     font-size: 14px;
     color: #212121;
@@ -87,7 +87,7 @@ export default {
   button {
     border: none;
     outline: none;
-    border-radius: 8px;
+    border-radius: 0 8px 8px 0;
     background-color: #212121;
     padding: 0 16px;
     cursor: pointer;

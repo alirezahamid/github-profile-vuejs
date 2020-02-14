@@ -9,7 +9,8 @@ export default new Vuex.Store({
     userRepo: [],
     username: '',
     activeSection: false,
-    showErrorMessage: false
+    showErrorMessage: false,
+    toggle: false
   },
   mutations: {
     pushUser (state, payload) {
@@ -26,26 +27,30 @@ export default new Vuex.Store({
     },
     showError (state, payload) {
       state.showErrorMessage = payload
+    },
+    toggleTheme (state, payload) {
+      state.toggle = payload
     }
   },
   actions: {
     fetchUser ({ commit, dispatch }) {
       Api.getUser(this.state.username)
         .then((res) => {
-          if (res.statusCode = 200) {
+          if (res.status === 200) {
             commit('pushUser', res.data)
             dispatch('fetchUserRepo')
             commit('showSection', true)
-          } else {
-            commit('showError', true)
+            commit('showError', false)
           }
         })
-        .catch()
+        .catch(() => {
+          commit('showError', true)
+        })
     },
     fetchUserRepo ({ commit }) {
       Api.getUserRepos(this.state.username)
         .then((res) => {
-          if (res.statusCode = 200) {
+          if (res.status === 200) {
             commit('pushUserRepo', res.data)
           }
         })

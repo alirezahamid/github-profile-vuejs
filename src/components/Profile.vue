@@ -12,7 +12,7 @@
         >
       </div>
       <div class="profile_content">
-        <p>{{userInfo.login}}</p>
+        <p>{{userInfo.name}}</p>
         <p v-show="userInfo.company">Company: {{userInfo.company}}</p>
         <p v-show="userInfo.location">Location: {{userInfo.location}}</p>
         <p v-show="userInfo.blog">Website: <a :href="userInfo.blog">{{userInfo.blog.replace(/(^\w+:|^)\/\//, '')}}</a></p>
