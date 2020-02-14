@@ -8,23 +8,58 @@
         <eva-icon
           name="moon-outline"
           fill="black"
+          v-show="toggle"
+          @click="darkThemeSwitch"
         ></eva-icon>
-        <!-- <eva-icon
+        <eva-icon
           name="sun-outline"
-          fill="black"
-        ></eva-icon> -->
+          fill="white"
+          v-show="!toggle"
+          @click="darkThemeSwitch"
+        ></eva-icon>
       </div>
 
     </header>
     <SearchUser />
+    <Profile />
   </div>
 </template>
 <script>
 import SearchUser from './components/SearchUser'
+import Profile from './components/Profile'
 import { EvaIcon } from 'vue-eva-icons'
 export default {
   name: 'app',
-  components: { SearchUser, [EvaIcon.name]: EvaIcon }
+  data: () => ({
+    toggle: true
+  }),
+  components: { SearchUser, Profile, [EvaIcon.name]: EvaIcon },
+  methods: {
+    addDarkTheme () {
+      var darkThemeElLink = document.createElement('link')
+      darkThemeElLink.setAttribute('href', './dark.css')
+      darkThemeElLink.setAttribute('rel', 'stylesheet')
+      darkThemeElLink.setAttribute('id', 'dark-theme-style')
+      var docHead = document.querySelector('head')
+      docHead.append(darkThemeElLink)
+      this.toggle = false
+    },
+    removeDarkTheme () {
+      var darkThemeElLink = document.querySelector('#dark-theme-style')
+      var parentNode = darkThemeElLink.parentNode
+      parentNode.removeChild(darkThemeElLink)
+      this.toggle = true
+    },
+    darkThemeSwitch () {
+      var darkThemeElLink = document.querySelector('#dark-theme-style')
+      if (!darkThemeElLink) {
+        this.addDarkTheme()
+      } else {
+        this.removeDarkTheme()
+      }
+    }
+  }
+
 }
 </script>
 <style lang="scss">
@@ -40,12 +75,16 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3em 0 5em 0;
+  margin: 3em 0;
   h1 {
     font-size: 28px;
     font-weight: 900;
     margin: 0;
     padding: 0;
   }
+}
+.dark {
+  background-color: #212121;
+  color: white;
 }
 </style>

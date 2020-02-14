@@ -1,0 +1,24 @@
+body{
+    background-color: #212121 !important;
+    color: white;
+}
+h1,h2,h3,h4,h5,h6,p,span{
+    color: white;
+
+}
+button{
+    background-color: white !important
+
+}
+button .eva{
+    fill: #212121;
+}
+.input_container,input{
+    background-color: #292929 !important;
+    color: white !important;
+}
+.profile_repo_card{
+    background-color: #292929 !important;
+  
+}
+
